@@ -2,7 +2,7 @@ import pygame
 from grid import newGrid
 
 #setting
-tick_speed = 2 # durée d'un tick en ms
+tick_speed = 3 # durée d'un tick en ms
 
 cell_size = 2 # Taille d'une cellule en pixels
 horizontal_cells = 400 # nombre de cellule sur le plan horizontal
@@ -42,7 +42,7 @@ class newGame:
             self.screen.fill("white")
 
             self.time_since_last_tick += self.dt
-            if self.time_since_last_tick > tick_speed:
+            while self.time_since_last_tick > tick_speed:
                 self.time_since_last_tick -= tick_speed
                 self.grid.updateAll()
 
@@ -58,5 +58,6 @@ class newGame:
             self.dt = self.clock.tick(60)
 
         pygame.quit()
+        self.grid.endDEBUG()
 
 jeu = newGame()
