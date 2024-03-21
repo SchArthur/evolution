@@ -1,13 +1,23 @@
 import pygame
+import random
 
 maximum_energy = 1500
+
+fruit_spawn_per_tick = 40
+
+initial_fruits_count = 10000
+line_fruits_step = 50
 
 class foodMatrix:
     def __init__(self, matrix_height, matrix_width, surface, cell_size) -> None:
         self.surface = surface
         self.cell_size = cell_size
-
+        self.matrix_size = (matrix_width, matrix_height)
+        self.fruits_quantity = 10000
+        
         self.matrix = []
+        self.fruit_spawn_pattern = "line"
+
         for y in range(matrix_height):
             line = []
             self.matrix.append(line)
@@ -15,6 +25,24 @@ class foodMatrix:
                 cell = []
                 self.matrix[y].append(cell)
                 self.matrix[y][x] = []
+        self.spawnFruitsEven(initial_fruits_count)
+
+    def spawnFruitsEven(self, quantity = 200):
+        for i in range(quantity):
+            x = random.randint(0, int(self.matrix_size[0] -1))
+            y = random.randint(0, int(self.matrix_size[1] -1))
+            self.addFood(x, y)
+    
+    def spawnFruitsInLine(self, quantity = 200):
+        for i in range(quantity):
+            isVertical = random.randrange(2)
+            if isVertical == 0:
+                pos_x = random.randrange(line_fruits_step, self.matrix_size[0], line_fruits_step)
+                pos_y = random.randrange(self.matrix_size[1])
+            else:
+                pos_x = random.randrange(self.matrix_size[0])
+                pos_y = random.randrange(line_fruits_step, self.matrix_size[1], line_fruits_step)
+            self.addFood(pos_x, pos_y)
 
     def draw(self):
         for y in range(len(self.matrix)):
@@ -22,14 +50,27 @@ class foodMatrix:
                 if self.matrix[y][x] != []: 
                     self.matrix[y][x].draw()
 
+    def fruitsSpawning(self):
+        if self.fruit_spawn_pattern == "line":
+            self.spawnFruitsInLine(fruit_spawn_per_tick)
+        elif self.fruit_spawn_pattern == 'even':
+            self.spawnFruitsEven(fruit_spawn_per_tick)
+
+    def spawnFoods(self, quantity):
+        pass
+
     def addFood(self, x, y):
         pos = pygame.Vector2(x,y)
         if self.matrix[y][x] == []:
             self.matrix[y][x] = newFood(self.surface, pos, self.cell_size)
+            self.fruits_quantity += 1
+            return 1
+        return 0
 
     def eatFood(self, x, y) -> int:
         if self.matrix[y][x] != []: 
             self.matrix[y][x] = []
+            self.fruits_quantity += 1
             return 1
         else:
             return 0

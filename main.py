@@ -32,9 +32,9 @@ class newGame:
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_z]:
-                self.grid.fruit_spawn_pattern = "line"
+                self.grid.food_matrix.fruit_spawn_pattern = "line"
             elif keys[pygame.K_a]:
-                self.grid.fruit_spawn_pattern = "even"
+                self.grid.food_matrix.fruit_spawn_pattern = "even"
             elif keys[pygame.K_SPACE]:
                 self.grid.spawnRandMicrobes(1)
 

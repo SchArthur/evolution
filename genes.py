@@ -1,6 +1,7 @@
 class newGene:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, parent = None) -> None:
+        if parent != None:
+            self.createRandomGene()
 
-    def createRandom(self):
-        
+    def createRandomGene(self):
+        pass

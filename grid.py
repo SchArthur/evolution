@@ -8,12 +8,8 @@ import random
 MODE_DEBUG = False
 
 grid_color = 'gray'
-line_fruits_step = 50
 initial_microbes_count = 50
-fruit_spawn_per_tick = 40
 
-max_fruits = 10000
-initial_fruits_count = 10000
 
 class newGrid:
     def __init__(self, surface : pygame.surface.Surface, cell_size) -> None:
@@ -34,16 +30,6 @@ class newGrid:
 
         self.spawnRandMicrobes(initial_microbes_count)
         
-        self.spawnFruitsEven(initial_fruits_count)
-        
-        self.fruit_spawn_pattern = "line"
-
-    def fruitsSpawning(self):
-        if self.fruit_spawn_pattern == "line":
-            self.spawnFruitsInLine(fruit_spawn_per_tick)
-        elif self.fruit_spawn_pattern == 'even':
-            self.spawnFruitsEven(fruit_spawn_per_tick)
-
     def spawnRandMicrobes(self, count = 1):
         for i in range(count):
             self.addMicrobe()
@@ -64,34 +50,8 @@ class newGrid:
         self.microbe_list.append(microbe)
         return microbe
 
-    def addFood(self, pos_x = 0, pos_y = 0):
-        """Fait apparaitre un fruit à une position aléatoire.
-        
-        Sauf si pos_x et/ou pos_y != 0"""
-        if len(self.food_list) < max_fruits:
-            if pos_x == 0:
-                pos_x = random.randrange(self.horizontal_cell_count)
-            if pos_y == 0:
-                pos_y = random.randrange(self.vertical_cell_count)
-            self.food_matrix.addFood(pos_x, pos_y)
-
-    def spawnFruitsEven(self, quantity = 200):
-        for i in range(quantity):
-            self.addFood()
-    
-    def spawnFruitsInLine(self, quantity = 200):
-        for i in range(quantity):
-            isVertical = random.randrange(2)
-            if isVertical == 0:
-                pos_x = random.randrange(line_fruits_step, self.horizontal_cell_count, line_fruits_step)
-                pos_y = random.randrange(self.vertical_cell_count)
-            else:
-                pos_x = random.randrange(self.horizontal_cell_count)
-                pos_y = random.randrange(line_fruits_step, self.vertical_cell_count, line_fruits_step)
-            self.addFood(pos_x, pos_y)
-
     def updateAll(self):
-        self.fruitsSpawning()
+        self.food_matrix.fruitsSpawning()
         for elt in self.microbe_list:
             energy_used = elt.update()
             self.fruitsEating(elt)
@@ -113,14 +73,15 @@ class newGrid:
         self.killDeadMicrobes()
 
     def killDeadMicrobes(self):
-        microbes_to_kill_indexes = []
-        for i in range(len(self.microbe_list)):
-            if self.microbe_list[i].energy < 0:
-                microbes_to_kill_indexes.append(i)
+        # microbes_to_kill_indexes = []
+        self.microbe_list = [elt for elt in self.microbe_list if elt.energy >0]
+        # for i in range(len(self.microbe_list)):
+        #     if self.microbe_list[i].energy < 0:
+        #         microbes_to_kill_indexes.append(i)
 
-        microbes_to_kill_indexes.reverse()
-        for index in microbes_to_kill_indexes:
-            del self.microbe_list[index]
+        # microbes_to_kill_indexes.reverse()
+        # for index in microbes_to_kill_indexes:
+        #     del self.microbe_list[index]
 
     def fruitsEating(self, microbe):
         if microbe.energy < maximum_energy:
