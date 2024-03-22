@@ -95,7 +95,9 @@ class newGrid:
     def draw(self):
         self.food_matrix.draw()
         for microbe in self.microbe_list:
-            microbe.draw(self.surface)
+            color, top_left, size = microbe.draw()
+            pygame.draw.rect(self.surface, color, pygame.rect.Rect(top_left, size))
+
 
     def endDEBUG(self):
         deboger.closeFile()

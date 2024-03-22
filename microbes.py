@@ -1,4 +1,3 @@
-import pygame
 import random
 import math
 import pos
@@ -150,8 +149,10 @@ class newMicrobe:
         left = (self.pos.y * self.cell_size) - extrude
         top_left = (top, left)
         size = (self.cell_size + extrude * 2, self.cell_size + extrude * 2)
-        rect = pygame.rect.Rect(top_left, size)
-        pygame.draw.rect(surface, 'blue', rect)
+        #rect = pygame.rect.Rect(top_left, size)
+        color = 'blue'
+        return color, top_left, size
+        #pygame.draw.rect(surface, 'blue', rect)
 
     def getGeneSTR(self):
         """Deprecated function"""
