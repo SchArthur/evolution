@@ -1,6 +1,6 @@
 import pygame
 from food import *
-from microbes import newMicrobe
+from microbes import Microbe
 import microbes
 import deboger
 import random
@@ -47,9 +47,9 @@ class newGrid:
         if pos_y == 0:
             pos_y = random.randrange(self.vertical_cell_count)
         if customGene == 0:
-            microbe = newMicrobe(self.surfacePos, pos.Pos(pos_x,pos_y), self.cell_size, id =this_microbeID)
+            microbe = Microbe(self.surfacePos, pos.Pos(pos_x,pos_y), self.cell_size, id =this_microbeID)
         else : 
-            microbe = newMicrobe(self.surfacePos, pos.Pos(pos_x,pos_y), self.cell_size, id = this_microbeID, customGene=customGene, hasParent=True, initialDirectionIndex=direction)
+            microbe = Microbe(self.surfacePos, pos.Pos(pos_x,pos_y), self.cell_size, id = this_microbeID, customGene=customGene, hasParent=True, initialDirectionIndex=direction)
 
         self.microbe_list.append(microbe)
         return microbe

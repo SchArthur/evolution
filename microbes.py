@@ -44,7 +44,7 @@ def mapNumbers(input_end, output_end, value, input_start = 0, output_start = 0) 
     output = math.ceil(output)
     return output
 
-class newMicrobe:
+class Microbe:
     def __init__(self, surfacePos: pos.Pos, pos : pos.Pos, cell_size, id, customGene : list = empty_gene, hasParent = False, energy = initial_energy , initialDirectionIndex = 0) -> None:
         self.surfacePos = surfacePos
         self.cell_size = cell_size
