@@ -150,9 +150,13 @@ class newMicrobe:
         top_left = (top, left)
         size = (self.cell_size + extrude * 2, self.cell_size + extrude * 2)
         #rect = pygame.rect.Rect(top_left, size)
-        color = 'blue'
-        return color, top_left, size
+        return self.getColor(), top_left, size
         #pygame.draw.rect(surface, 'blue', rect)
+
+    def getColor(self):
+        """Renvoie sa couleur, reflétant son énergie"""
+        v = 255-max(min(int(self.energy*255/initial_energy),255),0)
+        return v,v,255
 
     def getGeneSTR(self):
         """Deprecated function"""
