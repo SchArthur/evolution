@@ -1,16 +1,17 @@
 import pygame
 import random
 import math
+import pos
 
 extrude = 1 # nombre de pixels qui dépassent de la case
-step_index = [pygame.Vector2(-1,1),
-              pygame.Vector2(0,1),
-              pygame.Vector2(1,1),
-              pygame.Vector2(-1,0),
-              pygame.Vector2(1,0),
-              pygame.Vector2(-1,-1),
-              pygame.Vector2(0,-1),
-              pygame.Vector2(1,-1)]
+step_index = [pos.Pos(-1,1),
+              pos.Pos(0,1),
+              pos.Pos(1,1),
+              pos.Pos(-1,0),
+              pos.Pos(1,0),
+              pos.Pos(-1,-1),
+              pos.Pos(0,-1),
+              pos.Pos(1,-1)]
 
 empty_gene = [random.randint(0,1000),
               random.randint(0,1000),
@@ -45,7 +46,7 @@ def mapNumbers(input_end, output_end, value, input_start = 0, output_start = 0) 
     return output
 
 class newMicrobe:
-    def __init__(self, surfacePos, pos : pygame.Vector2, cell_size, id, customGene : list = empty_gene, hasParent = False, energy = initial_energy , initialDirectionIndex = 0) -> None:
+    def __init__(self, surfacePos: pos.Pos, pos : pos.Pos, cell_size, id, customGene : list = empty_gene, hasParent = False, energy = initial_energy , initialDirectionIndex = 0) -> None:
         self.surfacePos = surfacePos
         self.cell_size = cell_size
         self.pos = pos
@@ -133,20 +134,20 @@ class newMicrobe:
         self.direction = direction_index
         self.pos += step_index[direction_index]
         if self.pos.x < 0:
-            self.pos.x = (self.surfacePos[0] // self.cell_size) - 1
-        elif self.pos.x > (self.surfacePos[1] // self.cell_size) - 1:
+            self.pos.x = (self.surfacePos.x // self.cell_size) - 1
+        elif self.pos.x > (self.surfacePos.y // self.cell_size) - 1:
             self.pos.x = 0
 
         if self.pos.y < 0:
-            self.pos.y = (self.surfacePos[0] // self.cell_size) - 1
-        elif self.pos.y > (self.surfacePos[1] // self.cell_size) - 1:
+            self.pos.y = (self.surfacePos.x // self.cell_size) - 1
+        elif self.pos.y > (self.surfacePos.y // self.cell_size) - 1:
             self.pos.y = 0
 
         return energy_used
 
-    def draw(self, surface):
-        top = (self.pos[0] * self.cell_size) - extrude
-        left = (self.pos[1] * self.cell_size) - extrude
+    def draw(self):
+        top = (self.pos.x * self.cell_size) - extrude
+        left = (self.pos.y * self.cell_size) - extrude
         top_left = (top, left)
         size = (self.cell_size + extrude * 2, self.cell_size + extrude * 2)
         rect = pygame.rect.Rect(top_left, size)

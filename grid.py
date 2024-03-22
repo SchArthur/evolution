@@ -4,6 +4,7 @@ from microbes import newMicrobe
 import microbes
 import deboger
 import random
+import pos
 
 MODE_DEBUG = False
 
@@ -19,7 +20,7 @@ class newGrid:
         self.vertical_cell_count = surface.get_height() // cell_size
 
         #indique la taille en pixel du monde dans lequel on évolue
-        self.surfacePos = (self.surface.get_width(), surface.get_height())
+        self.surfacePos = pos.Pos(self.surface.get_width(), surface.get_height())
 
         self.food_matrix = foodMatrix(self.vertical_cell_count, self.horizontal_cell_count, self.surface, self.cell_size)
 
@@ -46,9 +47,9 @@ class newGrid:
         if pos_y == 0:
             pos_y = random.randrange(self.vertical_cell_count)
         if customGene == 0:
-            microbe = newMicrobe(self.surfacePos, pygame.Vector2(pos_x,pos_y), self.cell_size, id =this_microbeID)
+            microbe = newMicrobe(self.surfacePos, pos.Pos(pos_x,pos_y), self.cell_size, id =this_microbeID)
         else : 
-            microbe = newMicrobe(self.surfacePos, pygame.Vector2(pos_x,pos_y), self.cell_size, id = this_microbeID, customGene=customGene, hasParent=True, initialDirectionIndex=direction)
+            microbe = newMicrobe(self.surfacePos, pos.Pos(pos_x,pos_y), self.cell_size, id = this_microbeID, customGene=customGene, hasParent=True, initialDirectionIndex=direction)
 
         self.microbe_list.append(microbe)
         return microbe
