@@ -9,7 +9,7 @@ horizontal_cells = 400 # nombre de cellule sur le plan horizontal
 vertical_cells = 400 # nombre de cellule sur le plan vertical
 screen_size = (horizontal_cells * cell_size, vertical_cells * cell_size)
 
-class newGame:
+class Game:
     def __init__(self) -> None:
         pygame.init()
         self.screen = pygame.display.set_mode(screen_size)
@@ -60,4 +60,4 @@ class newGame:
         pygame.quit()
         self.grid.endDEBUG()
 
-jeu = newGame()
+jeu = Game()
