@@ -47,8 +47,9 @@ class newGene:
             if somme > rnd:
                 return i
 
-
+"""
 print(newGene(None))
 gen1 = newGene([1000]*8) 
 print(gen1)
 print(gen1.getGeneDirection())
+"""
