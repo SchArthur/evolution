@@ -65,6 +65,7 @@ class newMicrobe:
         # print(self.gene)
 
     def getGeneLength(self):
+        """Deprecated function"""
         sum = 0
 
         for i in range(len(self.gene)):
@@ -73,10 +74,12 @@ class newMicrobe:
         return sum
     
     def getRandomGene(self):
+        """Deprecated function"""
         for i in range(len(self.gene)):
             self.gene = self.mutateGene(self.gene, i)
     
     def mutateGene(self, gene, i = -1):
+        """Deprecated function"""
         new_genes = gene
 
         if i == -1:
@@ -109,6 +112,7 @@ class newMicrobe:
         return energy_used
             
     def getGeneDirection(self):
+        """Deprecated function"""
         somme = 0
         for i in range(len(self.gene)):
             somme += self.gene[i]
@@ -149,6 +153,7 @@ class newMicrobe:
         pygame.draw.rect(self.surface, 'blue', rect)
 
     def getGeneSTR(self):
+        """Deprecated function"""
         geneSTR = ''
         for i in range(len(self.gene)):
             geneSTR += (str(self.gene[i]) + ',')
