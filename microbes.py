@@ -45,8 +45,8 @@ def mapNumbers(input_end, output_end, value, input_start = 0, output_start = 0) 
     return output
 
 class newMicrobe:
-    def __init__(self, surface : pygame.surface.Surface, pos : pygame.Vector2, cell_size, id, customGene : list = empty_gene, hasParent = False, energy = initial_energy , initialDirectionIndex = 0) -> None:
-        self.surface = surface
+    def __init__(self, surfacePos, pos : pygame.Vector2, cell_size, id, customGene : list = empty_gene, hasParent = False, energy = initial_energy , initialDirectionIndex = 0) -> None:
+        self.surfacePos = surfacePos
         self.cell_size = cell_size
         self.pos = pos
         self.energy = energy
@@ -133,24 +133,24 @@ class newMicrobe:
         self.direction = direction_index
         self.pos += step_index[direction_index]
         if self.pos.x < 0:
-            self.pos.x = (self.surface.get_width() // self.cell_size) - 1
-        elif self.pos.x > (self.surface.get_width() // self.cell_size) - 1:
+            self.pos.x = (self.surfacePos[0] // self.cell_size) - 1
+        elif self.pos.x > (self.surfacePos[1] // self.cell_size) - 1:
             self.pos.x = 0
 
         if self.pos.y < 0:
-            self.pos.y = (self.surface.get_height() // self.cell_size) - 1
-        elif self.pos.y > (self.surface.get_height() // self.cell_size) - 1:
+            self.pos.y = (self.surfacePos[0] // self.cell_size) - 1
+        elif self.pos.y > (self.surfacePos[1] // self.cell_size) - 1:
             self.pos.y = 0
 
         return energy_used
 
-    def draw(self):
+    def draw(self, surface):
         top = (self.pos[0] * self.cell_size) - extrude
         left = (self.pos[1] * self.cell_size) - extrude
         top_left = (top, left)
         size = (self.cell_size + extrude * 2, self.cell_size + extrude * 2)
         rect = pygame.rect.Rect(top_left, size)
-        pygame.draw.rect(self.surface, 'blue', rect)
+        pygame.draw.rect(surface, 'blue', rect)
 
     def getGeneSTR(self):
         """Deprecated function"""
