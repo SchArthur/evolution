@@ -12,7 +12,7 @@ grid_color = 'gray'
 initial_microbes_count = 50
 
 
-class newGrid:
+class Grid:
     def __init__(self, surface : pygame.surface.Surface, cell_size) -> None:
         self.surface = surface
         self.cell_size = cell_size

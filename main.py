@@ -1,5 +1,5 @@
 import pygame
-from grid import newGrid
+from grid import Grid
 
 #setting
 tick_speed = 3 # durée d'un tick en ms
@@ -17,7 +17,7 @@ class newGame:
         self.dt = 0
 
         self.player_pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
-        self.grid = newGrid(self.screen, cell_size)
+        self.grid = Grid(self.screen, cell_size)
         self.time_since_last_tick = 0
 
         self.run()
