@@ -9,8 +9,9 @@ initial_fruits_count = 10000
 line_fruits_step = 50
 
 class foodMatrix:
-    def __init__(self, matrix_height, matrix_width, surface, cell_size) -> None:
+    def __init__(self, matrix_height, matrix_width, surface, screenWorld,  cell_size) -> None:
         self.surface = surface
+        self.screenWorld = screenWorld
         self.cell_size = cell_size
         self.matrix_size = (matrix_width, matrix_height)
         self.fruits_quantity = 10000
@@ -48,7 +49,7 @@ class foodMatrix:
         for y in range(len(self.matrix)):
             for x in range(len(self.matrix[y])):
                 if self.matrix[y][x] != []: 
-                    self.matrix[y][x].draw()
+                    self.matrix[y][x].draw(self.surface)
 
     def fruitsSpawning(self):
         if self.fruit_spawn_pattern == "line":
@@ -62,7 +63,7 @@ class foodMatrix:
     def addFood(self, x, y):
         pos = pygame.Vector2(x,y)
         if self.matrix[y][x] == []:
-            self.matrix[y][x] = newFood(self.surface, pos, self.cell_size)
+            self.matrix[y][x] = newFood(pos, self.cell_size)
             self.fruits_quantity += 1
             return 1
         return 0
@@ -79,13 +80,12 @@ class foodMatrix:
         print(self.matrix)
 
 class newFood:
-    def __init__(self, surface, pos : pygame.Vector2, cell_size) -> None:
-        self.surface = surface
+    def __init__(self, pos : pygame.Vector2, cell_size) -> None:
         self.cell_size = cell_size
         self.pos = pos
 
-    def draw(self):
+    def draw(self, surface):
         top_left = self.pos * self.cell_size
         size = (self.cell_size, self.cell_size)
         rect = pygame.rect.Rect(top_left, size)
-        pygame.draw.rect(self.surface, 'green', rect)
+        pygame.draw.rect(surface, 'green', rect)

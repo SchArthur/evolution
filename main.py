@@ -1,4 +1,5 @@
 import pygame
+import pos
 from grid import Grid
 
 #setting
@@ -15,8 +16,11 @@ class Game:
         self.screen = pygame.display.set_mode(screen_size)
         self.clock = pygame.time.Clock()
         self.dt = 0
+        #indique la taille en pixel du monde dans lequel on évolue
+        self.screenWorld = pos.Pos(self.screen.get_width(), self.screen.get_height())
 
-        self.grid = Grid(self.screenWorld, cell_size)
+
+        self.grid = Grid(self.screen, self.screenWorld, cell_size)
         self.time_since_last_tick = 0
 
         self.run()
