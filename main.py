@@ -20,6 +20,7 @@ class Game:
 
         self.grid = Grid(self.screen, self.screenWorld, cell_size)
         self.time_since_last_tick = 0
+        self.tick_speed = tick_speed
 
         self.run()
 
@@ -38,13 +39,21 @@ class Game:
                 self.grid.food_matrix.fruit_spawn_pattern = "even"
             elif keys[pygame.K_SPACE]:
                 self.grid.spawnRandMicrobes(1)
+            elif keys[pygame.K_KP_PLUS]:
+                self.tick_speed +=5
+            elif keys[pygame.K_KP_MINUS]:
+                self.tick_speed -=5
+                if self.tick_speed<tick_speed:
+                    self.tick_speed = tick_speed
+
+
 
             # fill the screen with a color to wipe away anything from last frame
             self.screen.fill("white")
 
             self.time_since_last_tick += self.dt
-            while self.time_since_last_tick > tick_speed:
-                self.time_since_last_tick -= tick_speed
+            while self.time_since_last_tick > self.tick_speed:
+                self.time_since_last_tick -= self.tick_speed
                 self.grid.updateAll()
 
             # draw elts
