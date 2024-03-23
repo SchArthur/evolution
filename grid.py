@@ -2,10 +2,10 @@ import pygame
 from food import *
 from microbes import Microbe
 import microbes
-import deboger
+import debuger
 import random
 import pos
-import deboger
+import debuger
 
 grid_color = 'gray'
 initial_microbes_count = 50
@@ -23,7 +23,7 @@ class Grid:
 
         self.microbeID = 0
 
-        self.debug = deboger.Debuger()
+        self.debug = debuger.Debuger()
         self.debug.activateDebugMode(False)
 
         self.food_list = []
@@ -59,7 +59,7 @@ class Grid:
             if elt.energy > microbes.energy_to_reproduce:
                 elt.energy = elt.energy // 2
                 child = self.addMicrobe(elt.pos.x, elt.pos.y, elt.gene, elt.direction)
-                deboger.writeChild(child.getGeneSTR())
+                debuger.writeChild(child.getGeneSTR())
 
             """ MODE DE DEBOGAGE """
             self.debug.writeMicrobeInfos(elt, energy_used, elt.getGeneSTR())
