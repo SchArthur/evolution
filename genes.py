@@ -15,7 +15,7 @@ def gen_v():
     return random.randint(0,GEN_MAX)
 
 # classe principale
-class newGene:
+class GeneMovement:
     def __init__(self, parent = None) -> None:
         self.gene = []
         if parent == None:
