@@ -5,8 +5,7 @@ import microbes
 import deboger
 import random
 import pos
-
-MODE_DEBUG = False
+import deboger
 
 grid_color = 'gray'
 initial_microbes_count = 50
@@ -24,8 +23,8 @@ class Grid:
 
         self.microbeID = 0
 
-        if MODE_DEBUG:
-            print("Mode debug activé")
+        self.debug = deboger.Debuger()
+        self.debug.activateDebugMode(False)
 
         self.food_list = []
         self.microbe_list = []
@@ -63,14 +62,7 @@ class Grid:
                 deboger.writeChild(child.getGeneSTR())
 
             """ MODE DE DEBOGAGE """
-            if MODE_DEBUG:
-                if elt.id == 1:
-                    if elt.age == 1:
-                        deboger.writeMicrobeInfos(elt, energy_used, elt.getGeneSTR())
-                    else:
-                         deboger.writeMicrobeInfos(elt, energy_used)
-                    if elt.energy <= 0:
-                        print('1 DEAD')
+            self.debug.writeMicrobeInfos(elt, energy_used, elt.getGeneSTR())
 
         self.killDeadMicrobes()
 
@@ -95,7 +87,3 @@ class Grid:
         for microbe in self.microbe_list:
             color, top_left, size = microbe.draw()
             pygame.draw.rect(self.surface, color, pygame.rect.Rect(top_left, size))
-
-
-    def endDEBUG(self):
-        deboger.closeFile()

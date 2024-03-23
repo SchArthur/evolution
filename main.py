@@ -59,6 +59,5 @@ class Game:
             self.dt = self.clock.tick(60)
 
         pygame.quit()
-        self.grid.endDEBUG()
 
 jeu = Game()
