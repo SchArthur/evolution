@@ -32,20 +32,7 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_z]:
-                self.grid.food_matrix.fruit_spawn_pattern = "line"
-            elif keys[pygame.K_a]:
-                self.grid.food_matrix.fruit_spawn_pattern = "even"
-            elif keys[pygame.K_SPACE]:
-                self.grid.spawnRandMicrobes(1)
-            elif keys[pygame.K_KP_PLUS]:
-                self.tick_speed +=5
-            elif keys[pygame.K_KP_MINUS]:
-                self.tick_speed -=5
-                if self.tick_speed<tick_speed:
-                    self.tick_speed = tick_speed
-
+            self.handler_keys()
 
 
             # fill the screen with a color to wipe away anything from last frame
@@ -69,4 +56,19 @@ class Game:
 
         pygame.quit()
 
+    def handler_keys(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_z]:
+            self.grid.food_matrix.fruit_spawn_pattern = "line"
+        elif keys[pygame.K_a]:
+            self.grid.food_matrix.fruit_spawn_pattern = "even"
+        elif keys[pygame.K_SPACE]:
+            self.grid.spawnRandMicrobes(1)
+        elif keys[pygame.K_KP_PLUS]:
+            self.tick_speed +=5
+        elif keys[pygame.K_KP_MINUS]:
+            self.tick_speed -=5
+            if self.tick_speed<tick_speed:
+                self.tick_speed = tick_speed
+    
 jeu = Game()
