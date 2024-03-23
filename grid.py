@@ -59,7 +59,7 @@ class Grid:
             if elt.energy > microbes.energy_to_reproduce:
                 elt.energy = elt.energy // 2
                 child = self.addMicrobe(elt.pos.x, elt.pos.y, elt.gene, elt.direction)
-                debuger.writeChild(child.getGeneSTR())
+                self.debug.writeChild(child.getGeneSTR())
 
             """ MODE DE DEBOGAGE """
             self.debug.writeMicrobeInfos(elt, energy_used, elt.getGeneSTR())
