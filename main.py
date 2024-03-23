@@ -4,7 +4,6 @@ from grid import Grid
 
 #setting
 tick_speed = 3 # durée d'un tick en ms
-
 cell_size = 2 # Taille d'une cellule en pixels
 horizontal_cells = 400 # nombre de cellule sur le plan horizontal
 vertical_cells = 400 # nombre de cellule sur le plan vertical
@@ -18,7 +17,6 @@ class Game:
         self.dt = 0
         #indique la taille en pixel du monde dans lequel on évolue
         self.screenWorld = pos.Pos(self.screen.get_width(), self.screen.get_height())
-
 
         self.grid = Grid(self.screen, self.screenWorld, cell_size)
         self.time_since_last_tick = 0
