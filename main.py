@@ -16,8 +16,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.dt = 0
 
-        self.player_pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
-        self.grid = Grid(self.screen, cell_size)
+        self.grid = Grid(self.screenWorld, cell_size)
         self.time_since_last_tick = 0
 
         self.run()
