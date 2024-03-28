@@ -3,6 +3,7 @@ import pos
 from grid import Grid
 
 #setting
+# --- COMMIT TEST ---
 tick_speed = 3 # durée d'un tick en ms
 cell_size = 2 # Taille d'une cellule en pixels
 horizontal_cells = 400 # nombre de cellule sur le plan horizontal
