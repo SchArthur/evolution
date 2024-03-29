@@ -1,10 +1,8 @@
 import random
 
-SUM_GEN_MAX = 8000
-NBR_GEN = 8
-GEN_MAX = SUM_GEN_MAX // NBR_GEN
-GEN_MUTATION_MAX = 500
-move_cost_array = [0,1,2,4,8,4,2,1]
+from setting import *
+
+
 
 # Fonctions utilitaires
 def normalise(gene):

@@ -1,14 +1,6 @@
 import pygame
 import random
-
-fruit_spawn_per_tick = 7
-
-initial_fruits_count = 20000
-line_fruits_step = 75
-vertical_line_count = 3
-horizontal_line_count = 3
-
-line_percent = 95
+from setting import *
 
 class foodMatrix:
     def __init__(self, matrix_height, matrix_width, surface, screenWorld,  cell_size) -> None:

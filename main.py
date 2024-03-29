@@ -1,14 +1,7 @@
 import pygame
 import pos
 from grid import Grid
-
-#setting
-# --- COMMIT TEST ---
-tick_speed = 3 # durée d'un tick en ms
-cell_size = 2 # Taille d'une cellule en pixels
-horizontal_cells = 400 # nombre de cellule sur le plan horizontal
-vertical_cells = 400 # nombre de cellule sur le plan vertical
-screen_size = (horizontal_cells * cell_size, vertical_cells * cell_size)
+from setting import *
 
 class Game:
     def __init__(self) -> None:

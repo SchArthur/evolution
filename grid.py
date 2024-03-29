@@ -6,10 +6,7 @@ import debuger
 import random
 import pos
 import debuger
-
-grid_color = 'gray'
-initial_microbes_count = 50
-
+from setting import *
 
 class Grid:
     def __init__(self, surface: pygame.surface.Surface, screenWorld : pos.Pos, cell_size) -> None:
