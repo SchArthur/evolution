@@ -39,9 +39,16 @@ class GeneMovement:
         """retourne sous forme de str le contenu du gène"""
         return str(self.gene)
     
+    def getGeneLen(self) -> int:
+        """renvoie la longueur totale du gene"""
+        somme = 0
+        for i in range(NBR_GEN):
+            somme += self.gene[i]
+        return somme
+    
     def getGeneDirection(self):
         """renvoie la direction du gène"""
-        rnd = random.randrange(SUM_GEN_MAX)
+        rnd = random.randrange(self.getGeneLen())
         somme = 0
         for i in range(NBR_GEN):
             somme += self.gene[i]
