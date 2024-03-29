@@ -23,24 +23,19 @@ class GeneMovement:
         if parentGene == None:
             self.createRandomGene()
         else:
-            children_genes = parentGene.getGene()
-            mutation = random.randint(0,GEN_MAX)-GEN_MAX//2
-            indice = random.randrange(NBR_GEN)
-            children_genes[indice] += mutation
-            if children_genes[indice] < 0:
-                children_genes[indice] = 0
-            self.gene = normalise(children_genes)
+            self.gene = parentGene.getGene()
+            self.mutateGene()
 
-    def mutateGene(self, gene):
-        new_genes = gene
-        i = random.randrange(len(new_genes))
+    def mutateGene(self):
+        new_genes = self.gene.copy()
+        i = random.randrange(NBR_GEN)
         mutation = random.randint(- GEN_MUTATION_MAX, GEN_MUTATION_MAX)
         new_genes[i] += mutation
         if new_genes[i] < 0:
             new_genes[i] = 0
 
         new_genes = normalise(new_genes)
-        self.gene = new_genes
+        self.gene = new_genes.copy()
 
     def createRandomGene(self):
         """Crée un gène aléatoire normalisé"""
