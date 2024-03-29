@@ -52,7 +52,7 @@ class Grid:
         return microbe
 
     def updateAll(self):
-        self.food_matrix.fruitsSpawning()
+        self.food_matrix.fruitsSpawningRoutine()
         for elt in self.microbe_list:
             energy_used = elt.update()
             self.fruitsEating(elt)

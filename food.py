@@ -19,7 +19,6 @@ class foodMatrix:
         self.fruits_quantity = initial_fruits_count
         
         self.matrix = []
-        self.fruit_spawn_pattern = "line"
 
         for y in range(matrix_height):
             line = []
@@ -28,7 +27,9 @@ class foodMatrix:
                 cell = []
                 self.matrix[y].append(cell)
                 self.matrix[y][x] = []
-        self.spawnFruitsEven(initial_fruits_count)
+
+        self.fruit_spawn_pattern = "even"
+        self.fruitsSpawningRoutine(initial_fruits_count)
 
     def spawnFruitsEven(self, quantity = 200):
         for i in range(quantity):
@@ -63,11 +64,11 @@ class foodMatrix:
                     for food in self.matrix[y][x]:
                         food.draw(self.surface)
 
-    def fruitsSpawning(self):
+    def fruitsSpawningRoutine(self, quantity = fruit_spawn_per_tick):
         if self.fruit_spawn_pattern == "line":
-            self.spawnFruitsInLine(fruit_spawn_per_tick)
+            self.spawnFruitsInLine(quantity)
         elif self.fruit_spawn_pattern == 'even':
-            self.spawnFruitsEven(fruit_spawn_per_tick)
+            self.spawnFruitsEven(quantity)
 
     def spawnFoods(self, quantity):
         pass
