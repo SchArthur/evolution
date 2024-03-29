@@ -1,11 +1,14 @@
 import pygame
 import random
 
-fruit_spawn_per_tick = 20
+fruit_spawn_per_tick = 7
 
 initial_fruits_count = 20000
-line_fruits_step = 60
-line_percent = 90
+line_fruits_step = 75
+vertical_line_count = 3
+horizontal_line_count = 3
+
+line_percent = 95
 
 class foodMatrix:
     def __init__(self, matrix_height, matrix_width, surface, screenWorld,  cell_size) -> None:
@@ -44,11 +47,11 @@ class foodMatrix:
             if line_spawn :
                 isVertical = random.randrange(2)
                 if isVertical == 0:
-                    pos_x = random.randrange(line_fruits_step, self.matrix_size[0], line_fruits_step)
+                    pos_x = random.randrange(line_fruits_step, (line_fruits_step * vertical_line_count) + 1, line_fruits_step)
                     pos_y = random.randrange(self.matrix_size[1])
                 else:
                     pos_x = random.randrange(self.matrix_size[0])
-                    pos_y = random.randrange(line_fruits_step, self.matrix_size[1], line_fruits_step)
+                    pos_y = random.randrange(line_fruits_step, (line_fruits_step * horizontal_line_count) + 1, line_fruits_step)
                 self.addFood(pos_x, pos_y)
             else :
                 self.spawnFruitsEven(1)
