@@ -1,12 +1,10 @@
 import pygame
 import random
 
-maximum_energy = 1500
+fruit_spawn_per_tick = 20
 
-fruit_spawn_per_tick = 40
-
-initial_fruits_count = 10000
-line_fruits_step = 50
+initial_fruits_count = 20000
+line_fruits_step = 60
 line_percent = 90
 
 class foodMatrix:

@@ -23,6 +23,7 @@ empty_gene = [random.randint(0,1000),
 
 move_cost = [0,1,2,4,8,4,2,1]
 
+maximum_energy = 1500
 geneMaxMutationValue = 1000
 energy_per_food = 40
 initial_energy = 500
@@ -50,6 +51,7 @@ class Microbe:
         self.cell_size = cell_size
         self.pos = pos
         self.energy = energy
+        self.maximum_energy = maximum_energy
 
         self.age = 0
         self.id = id
@@ -102,10 +104,11 @@ class Microbe:
     
     def eat(self, quantity):
         self.energy += energy_per_food * quantity
+        if self.energy > maximum_energy :
+            self.energy = maximum_energy
 
     def update(self):
         energy_used = self.move()
-        energy_used += energy_lost_per_tick
         self.energy -= energy_used
         self.age += 1
 
@@ -126,7 +129,7 @@ class Microbe:
                 return i
 
     def move(self):
-        energy_used = 0
+        energy_used = energy_lost_per_tick
         gene_dir = self.getGeneDirection()
         energy_used += move_cost[gene_dir]
         direction_index = correct_direction(gene_dir + self.direction)
