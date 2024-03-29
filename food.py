@@ -7,6 +7,7 @@ fruit_spawn_per_tick = 40
 
 initial_fruits_count = 10000
 line_fruits_step = 50
+line_percent = 90
 
 class foodMatrix:
     def __init__(self, matrix_height, matrix_width, surface, screenWorld,  cell_size) -> None:
@@ -36,14 +37,23 @@ class foodMatrix:
     
     def spawnFruitsInLine(self, quantity = 200):
         for i in range(quantity):
-            isVertical = random.randrange(2)
-            if isVertical == 0:
-                pos_x = random.randrange(line_fruits_step, self.matrix_size[0], line_fruits_step)
-                pos_y = random.randrange(self.matrix_size[1])
+            rnd = random.randrange(100)
+            if line_percent > rnd :
+                line_spawn = True
             else:
-                pos_x = random.randrange(self.matrix_size[0])
-                pos_y = random.randrange(line_fruits_step, self.matrix_size[1], line_fruits_step)
-            self.addFood(pos_x, pos_y)
+                line_spawn = False
+
+            if line_spawn :
+                isVertical = random.randrange(2)
+                if isVertical == 0:
+                    pos_x = random.randrange(line_fruits_step, self.matrix_size[0], line_fruits_step)
+                    pos_y = random.randrange(self.matrix_size[1])
+                else:
+                    pos_x = random.randrange(self.matrix_size[0])
+                    pos_y = random.randrange(line_fruits_step, self.matrix_size[1], line_fruits_step)
+                self.addFood(pos_x, pos_y)
+            else :
+                self.spawnFruitsEven(1)
 
     def draw(self):
         for y in range(len(self.matrix)):
