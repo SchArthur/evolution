@@ -15,7 +15,7 @@ class foodMatrix:
         self.screenWorld = screenWorld
         self.cell_size = cell_size
         self.matrix_size = (matrix_width, matrix_height)
-        self.fruits_quantity = 10000
+        self.fruits_quantity = initial_fruits_count
         
         self.matrix = []
         self.fruit_spawn_pattern = "line"
