@@ -3,6 +3,7 @@ import random
 SUM_GEN_MAX = 8000
 NBR_GEN = 8
 GEN_MAX = SUM_GEN_MAX // NBR_GEN
+GEN_MUTATION_MAX = 500
 move_cost_array = [0,1,2,4,8,4,2,1]
 
 # Fonctions utilitaires
@@ -22,13 +23,24 @@ class GeneMovement:
         if parentGene == None:
             self.createRandomGene()
         else:
-            children_genes = parentGene.copy()
+            children_genes = parentGene.getGene()
             mutation = random.randint(0,GEN_MAX)-GEN_MAX//2
             indice = random.randrange(NBR_GEN)
             children_genes[indice] += mutation
             if children_genes[indice] < 0:
                 children_genes[indice] = 0
             self.gene = normalise(children_genes)
+
+    def mutateGene(self, gene):
+        new_genes = gene
+        i = random.randrange(len(new_genes))
+        mutation = random.randint(- GEN_MUTATION_MAX, GEN_MUTATION_MAX)
+        new_genes[i] += mutation
+        if new_genes[i] < 0:
+            new_genes[i] = 0
+
+        new_genes = normalise(new_genes)
+        self.gene = new_genes
 
     def createRandomGene(self):
         """Crée un gène aléatoire normalisé"""
@@ -45,6 +57,9 @@ class GeneMovement:
         for i in range(NBR_GEN):
             somme += self.gene[i]
         return somme
+    
+    def getGene(self):
+        return self.gene
     
     def getGeneDirection(self):
         """renvoie la direction du gène"""

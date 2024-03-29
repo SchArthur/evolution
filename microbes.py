@@ -64,28 +64,6 @@ class Microbe:
 
         self.direction = self.gene.getGeneDirection()
     
-    def mutateGene(self, gene, i = -1):
-        """Deprecated function"""
-        new_genes = gene
-
-        if i == -1:
-            i = random.randrange(len(new_genes))
-        mutation = random.randrange(geneMaxMutationValue)
-        mutation -= mutation//2
-        new_genes[i] += mutation
-        if new_genes[i] < 0:
-            new_genes[i] = 0
-
-        sum = 0
-        for i in range(len(new_genes)):
-            sum += new_genes[i]
-        biggest = max(new_genes)
-
-        for i in range(len(new_genes)):
-            new_genes[i] = mapNumbers(biggest, 1000, new_genes[i])
-
-        return new_genes
-    
     def eat(self, quantity):
         self.energy += energy_per_food * quantity
         if self.energy > maximum_energy :
