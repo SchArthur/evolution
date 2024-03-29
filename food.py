@@ -56,8 +56,9 @@ class foodMatrix:
     def draw(self):
         for y in range(len(self.matrix)):
             for x in range(len(self.matrix[y])):
-                if self.matrix[y][x] != []: 
-                    self.matrix[y][x].draw(self.surface)
+                if self.matrix[y][x] != []:
+                    for food in self.matrix[y][x]:
+                        food.draw(self.surface)
 
     def fruitsSpawning(self):
         if self.fruit_spawn_pattern == "line":
@@ -70,17 +71,16 @@ class foodMatrix:
 
     def addFood(self, x, y):
         pos = pygame.Vector2(x,y)
-        if self.matrix[y][x] == []:
-            self.matrix[y][x] = newFood(pos, self.cell_size)
-            self.fruits_quantity += 1
-            return 1
-        return 0
+        self.matrix[y][x].append(newFood(pos, self.cell_size))
+        self.fruits_quantity += 1
+        return 1
 
     def eatFood(self, x, y) -> int:
-        if self.matrix[y][x] != []: 
+        if self.matrix[y][x] != []:
+            food_at = len(self.matrix[y][x])
             self.matrix[y][x] = []
-            self.fruits_quantity += 1
-            return 1
+            self.fruits_quantity -= 1
+            return food_at
         else:
             return 0
 
