@@ -1,6 +1,7 @@
 import random
 import math
 import pos
+import genes
 
 extrude = 1 # nombre de pixels qui dépassent de la case
 step_index = [pos.Pos(-1,1),
@@ -57,28 +58,11 @@ class Microbe:
         self.id = id
 
         if hasParent :
-            self.gene = self.mutateGene(customGene.copy())
+            self.gene = genes.GeneMovement(customGene)
         else:
-            self.gene = customGene.copy()
-            self.getRandomGene()
+            self.gene = genes.GeneMovement()
 
-        #self.direction = random.randrange(len(step_index))
-        self.direction = initialDirectionIndex
-        # print(self.gene)
-
-    def getGeneLength(self):
-        """Deprecated function"""
-        sum = 0
-
-        for i in range(len(self.gene)):
-            sum += self.gene[i]
-
-        return sum
-    
-    def getRandomGene(self):
-        """Deprecated function"""
-        for i in range(len(self.gene)):
-            self.gene = self.mutateGene(self.gene, i)
+        self.direction = self.gene.getGeneDirection()
     
     def mutateGene(self, gene, i = -1):
         """Deprecated function"""
@@ -114,25 +98,11 @@ class Microbe:
 
         return energy_used
             
-    def getGeneDirection(self):
-        """Deprecated function"""
-        somme = 0
-        for i in range(len(self.gene)):
-            somme += self.gene[i]
-
-        rnd = random.randrange(somme)
-        
-        somme = 0
-        for i in range(len(self.gene)):
-            somme += self.gene[i]
-            if somme > rnd:
-                return i
-
     def move(self):
         energy_used = energy_lost_per_tick
-        gene_dir = self.getGeneDirection()
-        energy_used += move_cost[gene_dir]
-        direction_index = correct_direction(gene_dir + self.direction)
+        gene_dir = self.gene.getGeneDirection()
+        energy_used += genes.move_cost_array[gene_dir]
+        direction_index = (gene_dir + self.direction)%8
         self.direction = direction_index
         self.pos += step_index[direction_index]
         if self.pos.x < 0:
@@ -160,11 +130,3 @@ class Microbe:
         """Renvoie sa couleur, reflétant son énergie"""
         v = 255-max(min(int(self.energy*255/initial_energy),255),0)
         return v,v,255
-
-    def getGeneSTR(self):
-        """Deprecated function"""
-        geneSTR = ''
-        for i in range(len(self.gene)):
-            geneSTR += (str(self.gene[i]) + ',')
-        geneSTR[:-1]
-        return geneSTR

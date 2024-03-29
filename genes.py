@@ -3,6 +3,7 @@ import random
 SUM_GEN_MAX = 8000
 NBR_GEN = 8
 GEN_MAX = SUM_GEN_MAX // NBR_GEN
+move_cost_array = [0,1,2,4,8,4,2,1]
 
 # Fonctions utilitaires
 def normalise(gene):
@@ -16,12 +17,12 @@ def gen_v():
 
 # classe principale
 class GeneMovement:
-    def __init__(self, parent = None) -> None:
+    def __init__(self, parentGene = None) -> None:
         self.gene = []
-        if parent == None:
+        if parentGene == None:
             self.createRandomGene()
         else:
-            children_genes = parent.copy()
+            children_genes = parentGene.copy()
             mutation = random.randint(0,GEN_MAX)-GEN_MAX//2
             indice = random.randrange(NBR_GEN)
             children_genes[indice] += mutation
