@@ -13,6 +13,8 @@ class Game:
         #indique la taille en pixel du monde dans lequel on évolue
         self.screenWorld = pos.Pos(self.screen.get_width(), self.screen.get_height())
 
+        print(getKeysSettingsSTR())
+
         self.grid = Grid(self.screen, self.screenWorld, cell_size)
         self.time_since_last_tick = 0
         self.tick_speed = tick_speed

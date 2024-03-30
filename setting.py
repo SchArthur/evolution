@@ -11,6 +11,21 @@ key_spawn_one = pygame.K_SPACE
 key_pause = pygame.K_p
 key_play = pygame.K_o
 
+def getKeysSettingsSTR() -> str:
+    text = ""
+    text += getControlKeysSTR("NOURRITURE EN LIGNES", key_line)
+    text += getControlKeysSTR("NOURRITURE EPARPILLEES", key_even)
+    text += getControlKeysSTR("PAUSE", key_pause)
+    text += getControlKeysSTR("PLAY", key_play)
+    text += getControlKeysSTR("AJOUTER UN MICROBE", key_spawn_one)
+
+    return text
+
+def getControlKeysSTR(action :str, key :int) -> str:
+    text = ""
+    text = "Pour " + action + " appuyez sur : " + pygame.key.name(key).upper() + " .\n"
+    return text
+
 # ----- FOOD -----
 fruit_spawn_per_tick = 7
 
