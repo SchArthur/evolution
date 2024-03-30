@@ -19,11 +19,12 @@ class GeneMovement:
         if parentGene == None:
             self.createRandomGene()
         else:
-            self.gene = parentGene.getGene()
+            self.setGene(parentGene.getGene())
             self.mutateGene()
 
     def mutateGene(self):
         new_genes = self.gene.copy()
+        print("old gene : "+ str(new_genes))
         i = random.randrange(NBR_GEN)
         mutation = random.randint(- GEN_MUTATION_MAX, GEN_MUTATION_MAX)
         new_genes[i] += mutation
@@ -31,6 +32,7 @@ class GeneMovement:
             new_genes[i] = 0
 
         new_genes = normalise(new_genes)
+        print("new gene : "+ str(new_genes))
         self.gene = new_genes.copy()
 
     def createRandomGene(self):
@@ -52,6 +54,9 @@ class GeneMovement:
     def getGene(self):
         return self.gene
     
+    def setGene(self, customGene):
+        self.gene = customGene
+    
     def getGeneDirection(self):
         """renvoie la direction du gène"""
         rnd = random.randrange(self.getGeneLen())
@@ -62,8 +67,10 @@ class GeneMovement:
                 return i
 
 """
-print(newGene(None))
-gen1 = newGene([1000]*8) 
-print(gen1)
-print(gen1.getGeneDirection())
+testGene = [7881, 0, 118, 0, 0, 0, 0, 0]
+test = GeneMovement()
+test.setGene(testGene)
+print(test.getGene())
+for i in range(100):
+    print(test.getGeneDirection())
 """

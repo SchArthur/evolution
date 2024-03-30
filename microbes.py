@@ -5,6 +5,7 @@ import genes
 import debuger
 
 from setting import *
+from utils import *
 
 step_index = [pos.Pos(-1,1),
               pos.Pos(0,1),
