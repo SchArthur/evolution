@@ -62,13 +62,12 @@ class Microbe:
     def getInfos(self) -> str :
         text = ""
         text += "MICROBE ID : " + str(self.id) + "\n"
-        text += "AGE : " + str(self.age) + "\n"
+        text += "AGE : " + str(self.age) + " frames\n"
         text += "Gene : " + str(self.gene.getGene()) + "\n"
         text += "A un parent : " + str(self.hasParent) + "\n"
         if self.hasParent : 
             text += "Gene parent : " + str(self.parentGene) + "\n"
-        text += "\n"
-        
+
         return text
 
     def update(self):
