@@ -71,9 +71,11 @@ class Grid:
         #     del self.microbe_list[index]
 
     def fruitsEating(self, microbe):
-        if microbe.energy < microbe.maximum_energy:
-            eaten_fruits = self.food_matrix.eatFood(int(microbe.pos.x), int(microbe.pos.y))
+        #if microbe.energy < microbe.maximum_energy:
+        eaten_fruits = self.food_matrix.eatFood(int(microbe.pos.x), int(microbe.pos.y))
+        while (eaten_fruits !=0) and ((microbe.energy + energy_per_food) < microbe.maximum_energy):
             microbe.eat(eaten_fruits)
+            eaten_fruits = self.food_matrix.eatFood(int(microbe.pos.x), int(microbe.pos.y))
             
     def draw(self):
         self.food_matrix.draw()

@@ -73,10 +73,13 @@ class foodMatrix:
 
     def eatFood(self, x, y) -> int:
         if self.matrix[y][x] != []:
-            food_at = len(self.matrix[y][x])
-            self.matrix[y][x] = []
+            # food_at = len(self.matrix[y][x])
+            # self.matrix[y][x] = []
+            # self.fruits_quantity -= 1
+            # return food_at
+            self.matrix[y][x] = self.matrix[y][x][1:]
             self.fruits_quantity -= 1
-            return food_at
+            return 1
         else:
             return 0
 
