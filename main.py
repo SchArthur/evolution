@@ -78,6 +78,9 @@ class Game:
                 print("Appuyez sur " + (pygame.key.name(key_pause)).capitalize() + " pour mettre en pause")
         elif keys[pygame.K_KP_PLUS]:
             self.tick_speed +=5
+        elif keys[pygame.K_r]:
+            for microbe in self.grid.microbe_list:
+                microbe.gene.setGene([8000, 0, 0, 0, 0, 0, 0, 0])
         elif keys[pygame.K_KP_MINUS]:
             self.tick_speed -=5
             if self.tick_speed<tick_speed:
@@ -90,5 +93,9 @@ class Game:
             for microbe in self.grid.microbe_list:
                 if (microbe.pos.x  == mouse_pos_coords.x) and (microbe.pos.y == mouse_pos_coords.y):
                     print(microbe.getInfos())
+        elif mouse[2]:
+            mouse_pos = pygame.mouse.get_pos()
+            mouse_pos_coords = pos.Pos(mouse_pos[0] // cell_size, mouse_pos[1] // cell_size)
+            self.grid.addMicrobe(mouse_pos_coords.x, mouse_pos_coords.y)
     
 jeu = Game()

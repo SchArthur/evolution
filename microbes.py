@@ -84,7 +84,7 @@ class Microbe:
         energy_used += move_cost_array[gene_dir]
         direction_index = (gene_dir + self.direction)%8
         self.direction = direction_index
-        self.pos += step_index[direction_index]
+        self.pos += step_index[self.direction]
         if self.pos.x < 0:
             self.pos.x = (self.surfacePos.x // self.cell_size) - 1
         elif self.pos.x > (self.surfacePos.y // self.cell_size) - 1:
