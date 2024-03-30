@@ -1,6 +1,15 @@
+import pygame
+
 # ----- DEBUG MODE -----
 
 DEBUG_MODE = True
+
+# ----- KEYS -----
+key_line = pygame.K_z
+key_even = pygame.K_a
+key_spawn_one = pygame.K_SPACE
+key_pause = pygame.K_p
+key_play = pygame.K_o
 
 # ----- FOOD -----
 fruit_spawn_per_tick = 7

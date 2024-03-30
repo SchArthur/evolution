@@ -18,6 +18,8 @@ class Game:
         self.tick_speed = tick_speed
         self.tick_count = 0
 
+        self.speed_factor = 1
+
         self.run()
 
     def run(self):
@@ -34,7 +36,7 @@ class Game:
             # fill the screen with a color to wipe away anything from last frame
             self.screen.fill("white")
 
-            self.time_since_last_tick += self.dt
+            self.time_since_last_tick += self.dt * self.speed_factor 
             while self.time_since_last_tick > self.tick_speed:
                 self.time_since_last_tick -= self.tick_speed
                 self.tick_count += 1
@@ -56,12 +58,22 @@ class Game:
 
     def handler_keys(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_z]:
+        if keys[key_line]:
             self.grid.food_matrix.fruit_spawn_pattern = "line"
-        elif keys[pygame.K_a]:
+        elif keys[key_even]:
             self.grid.food_matrix.fruit_spawn_pattern = "even"
-        elif keys[pygame.K_SPACE]:
+        elif keys[key_spawn_one]:
             self.grid.spawnRandMicrobes(1)
+        elif keys[key_pause]:
+            if self.speed_factor != 0:
+                self.speed_factor = 0
+                print("Game paused")
+                print("Appuyez sur " + (pygame.key.name(key_play)).capitalize() + " pour reprendre")
+        elif keys[key_play]:
+            if self.speed_factor != 1:
+                self.speed_factor = 1
+                print("Game resumed")
+                print("Appuyez sur " + (pygame.key.name(key_pause)).capitalize() + " pour mettre en pause")
         elif keys[pygame.K_KP_PLUS]:
             self.tick_speed +=5
         elif keys[pygame.K_KP_MINUS]:
