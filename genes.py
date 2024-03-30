@@ -2,8 +2,6 @@ import random
 
 from setting import *
 
-
-
 # Fonctions utilitaires
 def normalise(gene):
     """Normalise un gène sur GEN_MAX"""

@@ -2,6 +2,7 @@ import random
 import math
 import pos
 import genes
+import debuger
 
 from setting import *
 
@@ -13,7 +14,6 @@ step_index = [pos.Pos(-1,1),
               pos.Pos(-1,-1),
               pos.Pos(0,-1),
               pos.Pos(1,-1)]
-
 
 
 def correct_direction(Index) -> int:
@@ -48,6 +48,8 @@ class Microbe:
             self.gene = genes.GeneMovement()
 
         self.direction = self.gene.getGeneDirection()
+
+        debuger.mainDebugger.microbesSpawnDebug(self)
     
     def eat(self, quantity):
         self.energy += energy_per_food * quantity

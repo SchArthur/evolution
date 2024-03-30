@@ -2,6 +2,7 @@ import pygame
 import pos
 from grid import Grid
 from setting import *
+import debuger
 
 class Game:
     def __init__(self) -> None:
@@ -15,6 +16,7 @@ class Game:
         self.grid = Grid(self.screen, self.screenWorld, cell_size)
         self.time_since_last_tick = 0
         self.tick_speed = tick_speed
+        self.tick_count = 0
 
         self.run()
 
@@ -35,6 +37,7 @@ class Game:
             self.time_since_last_tick += self.dt
             while self.time_since_last_tick > self.tick_speed:
                 self.time_since_last_tick -= self.tick_speed
+                self.tick_count += 1
                 self.grid.updateAll()
 
             # draw elts
@@ -48,6 +51,7 @@ class Game:
             # independent physics.
             self.dt = self.clock.tick(60)
 
+        debuger.mainDebugger.write_content()
         pygame.quit()
 
     def handler_keys(self):

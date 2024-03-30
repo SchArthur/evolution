@@ -1,3 +1,7 @@
+# ----- DEBUG MODE -----
+
+DEBUG_MODE = True
+
 # ----- FOOD -----
 fruit_spawn_per_tick = 7
 
