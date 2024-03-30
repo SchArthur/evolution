@@ -40,11 +40,11 @@ class foodMatrix:
             if line_spawn :
                 isVertical = random.randrange(2)
                 if isVertical == 0:
-                    pos_x = random.randrange(line_fruits_step, (line_fruits_step * vertical_line_count) + 1, line_fruits_step)
+                    pos_x = random.randrange(v_line_fruits_step, (v_line_fruits_step * vertical_line_count) + 1, v_line_fruits_step)
                     pos_y = random.randrange(self.matrix_size[1])
                 else:
                     pos_x = random.randrange(self.matrix_size[0])
-                    pos_y = random.randrange(line_fruits_step, (line_fruits_step * horizontal_line_count) + 1, line_fruits_step)
+                    pos_y = random.randrange(h_line_fruits_step, (h_line_fruits_step * horizontal_line_count) + 1, h_line_fruits_step)
                 self.addFood(pos_x, pos_y)
             else :
                 self.spawnFruitsEven(1)

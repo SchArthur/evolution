@@ -31,8 +31,9 @@ fruit_spawn_per_tick = 7
 
 initial_fruits_count = 20000
 
-line_fruits_step = 75
-vertical_line_count = 3
+v_line_fruits_step = 75
+vertical_line_count = 4
+h_line_fruits_step = 90
 horizontal_line_count = 3
 line_percent = 95
 
