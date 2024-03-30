@@ -82,5 +82,13 @@ class Game:
             self.tick_speed -=5
             if self.tick_speed<tick_speed:
                 self.tick_speed = tick_speed
+        
+        mouse = pygame.mouse.get_pressed()
+        if mouse[0]:
+            mouse_pos = pygame.mouse.get_pos()
+            mouse_pos_coords = pos.Pos(mouse_pos[0] // cell_size, mouse_pos[1] // cell_size)
+            for microbe in self.grid.microbe_list:
+                if (microbe.pos.x  == mouse_pos_coords.x) and (microbe.pos.y == mouse_pos_coords.y):
+                    print(microbe.getInfos())
     
 jeu = Game()

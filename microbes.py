@@ -39,10 +39,13 @@ class Microbe:
         self.energy = energy
         self.maximum_energy = maximum_energy
 
+        self.hasParent = hasParent
+
         self.age = 0
         self.id = id
 
         if hasParent :
+            self.parentGene = customGene.gene.copy()
             self.gene = genes.GeneMovement(customGene)
         else:
             self.gene = genes.GeneMovement()
@@ -55,6 +58,18 @@ class Microbe:
         self.energy += energy_per_food * quantity
         if self.energy > maximum_energy :
             self.energy = maximum_energy
+
+    def getInfos(self) -> str :
+        text = ""
+        text += "MICROBE ID : " + str(self.id) + "\n"
+        text += "AGE : " + str(self.age) + "\n"
+        text += "Gene : " + str(self.gene.getGene()) + "\n"
+        text += "A un parent : " + str(self.hasParent) + "\n"
+        if self.hasParent : 
+            text += "Gene parent : " + str(self.parentGene) + "\n"
+        text += "\n"
+        
+        return text
 
     def update(self):
         energy_used = self.move()
